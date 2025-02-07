@@ -1,29 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import { Container } from 'react-bootstrap'
+import NavBarEdunova from './components/NavBarEdunova'
+import { Route, Routes } from 'react-router-dom'
+import { RouteNames } from './constants'
+import Pocetna from './Pages/Pocetna'
+import ValutePregled from './Pages/Smjerovi/ValutePregled'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Edunova App</h1>
-      Osijek
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 2)}>
-          Vrjednost brojaca je  {count}
-        </button>
-        
-      </div>
+      <Container>
+
+        <NavBarEdunova></NavBarEdunova>
+        <Routes>
+          <Route path={RouteNames.HOME} element={<Pocetna />} />
+          <Route path={RouteNames.VALUTE_PREGLED} element={<ValutePregled />} />
+        </Routes>
+
+        <hr />
+        &copy; Kriptovalute 2025
+      
+      </Container>
+
       
     </>
   )
