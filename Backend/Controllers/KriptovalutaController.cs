@@ -1,16 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Backend.Data;
+using Backend.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class SmjerController : ControllerBase
+    public class KriptovaluteController : ControllerBase
     {
 
         private readonly KriptovaluteContext _context;
 
-       
-        public SmjerController(KriptovaluteContext context)
+
+        public KriptovaluteController(KriptovaluteContext context)
         {
             _context = context;
         }
@@ -54,7 +56,7 @@ namespace Backend.Controllers
         {
             try
             {
-                _context.Smjerovi.Add(kriptovaluta);
+                _context.Kriptovalute.Add(kriptovaluta);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status201Created, kriptovaluta);
             }
@@ -80,11 +82,12 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
-                
-                s.Naziv = kriptovaluta.Naziv;
-                s.CijenaSmjera = smjer.CijenaSmjera;
-                s.IzvodiSeOd = smjer.IzvodiSeOd;
-                s.Vaucer = smjer.Vaucer;
+
+                s.Ime = kriptovaluta.Ime;
+                s.Cijena = kriptovaluta.Cijena;
+                s.Volumen = kriptovaluta.Volumen;
+                s.Trzisna_vrjednost = kriptovaluta.Trzisna_vrjednost;
+                s.Simbol = kriptovaluta.Simbol;
 
                 _context.Kriptovalute.Update(s);
                 _context.SaveChanges();
@@ -108,7 +111,7 @@ namespace Backend.Controllers
                 {
                     return NotFound();
                 }
-                _context.Smjerovi.Remove(s);
+                _context.Kriptovalute.Remove(s);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
@@ -118,3 +121,4 @@ namespace Backend.Controllers
             }
         }
     }
+}

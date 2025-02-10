@@ -1,10 +1,10 @@
 ﻿using Backend.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
+
 
 namespace Backend.Data
 {
-    public class KriptovaluteContext
+    public class KriptovaluteContext : DbContext
     {
         public KriptovaluteContext(DbContextOptions<KriptovaluteContext> options) : base(options)
         {
@@ -12,7 +12,7 @@ namespace Backend.Data
 
         }
 
-        public DbSet<Kriptovaluta> Smjerovi { get; set; } 
+        public DbSet<Kriptovaluta> Kriptovalute { get; set; } 
 
 
     }

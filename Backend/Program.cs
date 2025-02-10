@@ -1,6 +1,9 @@
+using Backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-.
+
 
 builder.Services.AddControllers();
  
@@ -11,7 +14,7 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<KriptovaluteContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EdunovaContext"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("KriptovaluteContext"));
 });
 
 
