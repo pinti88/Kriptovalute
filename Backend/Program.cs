@@ -17,6 +17,14 @@ builder.Services.AddDbContext<KriptovaluteContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("KriptovaluteContext"));
 });
 
+builder.Services.AddCors(o => {
+
+    o.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+
+});
 
 var app = builder.Build();
 
@@ -36,5 +44,6 @@ app.UseSwaggerUI(o => {
 });
 
 app.MapControllers();
+app.UseCors("CorsPolicy");
 
 app.Run();
