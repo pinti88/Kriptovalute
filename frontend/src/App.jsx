@@ -5,7 +5,7 @@ import NavBarEdunova from './components/NavBarEdunova'
 import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constants'
 import Pocetna from './Pages/Pocetna'
-import ValutePregled from './Pages/Smjerovi/ValutePregled'
+import ValutePregled from './Pages/Kriptovalute/ValutePregled'
 
 function App() {
   
@@ -31,3 +31,4 @@ function App() {
 }
 
 export default App
+
