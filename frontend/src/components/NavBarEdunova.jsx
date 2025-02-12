@@ -32,7 +32,9 @@ export default function NavBarEdunova(){
               onClick={()=>navigate(RouteNames.VALUTE_PREGLED)}
               >Valute</NavDropdown.Item>
               
+              
             </NavDropdown>
+            <Nav.Link href='https://pinti88-001-site1.otempurl.com/swagger'target='_blank'>Swagger</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

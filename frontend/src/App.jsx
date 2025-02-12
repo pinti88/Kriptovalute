@@ -6,6 +6,7 @@ import { Route, Routes } from 'react-router-dom'
 import { RouteNames } from './constants'
 import Pocetna from './Pages/Pocetna'
 import ValutePregled from './Pages/Kriptovalute/ValutePregled'
+import ValuteDodaj from './Pages/Kriptovalute/valuteDodaj'
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.VALUTE_PREGLED} element={<ValutePregled />} />
+          <Route path={RouteNames.VALUTA_NOVI} element={<ValuteDodaj/>}/>
         </Routes>
 
         <hr />

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import KriptovaluteServices from "../../services/KriptovaluteServices"
 import { Table } from "react-bootstrap";
+import { NumericFormat } from "react-number-format";
+import { Link } from "react-router-dom";
+import { RouteNames } from "../../constants";
 
 
 export default function ValutePregled(){
@@ -21,6 +24,12 @@ export default function ValutePregled(){
 
     return(
         <>
+
+        <Link
+        to={RouteNames.VALUTA_NOVI}
+        className="btn btn-success siroko"
+
+        >Dodaj novu kritovalutu</Link>
         <Table striped bordered hover responsive>
             <thead>
                 <tr>
@@ -45,10 +54,21 @@ export default function ValutePregled(){
                         <td>
                             {kriptovaluta.volumen}
                         </td>
-                        <td>
+                        <td>                    
                             {kriptovaluta.trzisna_vrjednost}
                         </td>
-                        <td>
+                        <td className={kriptovaluta.cijena==null ? 'sredina' : 'desno'}>
+                            <NumericFormat
+                                value={kriptovaluta.cijena}
+                                displayType={'text'}
+                                thousandSeperator='.'
+                                decimalSeparator=","
+                                prefix={'$'}
+                                decimalScale={2}
+                                fixedDecimalScale
+                                />
+
+                           
                             {kriptovaluta.cijena}
                         </td>
                     </tr>
