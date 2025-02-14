@@ -20,6 +20,7 @@ function App() {
           <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.VALUTE_PREGLED} element={<ValutePregled />} />
           <Route path={RouteNames.VALUTA_NOVI} element={<ValuteDodaj/>}/>
+          <Route path={RouteNames.VALUTA_PROMJENA} element={<ValutePromjena/>}/>
         </Routes>
 
         <hr />

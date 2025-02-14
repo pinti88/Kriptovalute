@@ -2,14 +2,16 @@ import { useEffect, useState } from "react"
 import KriptovaluteServices from "../../services/KriptovaluteServices"
 import { Table } from "react-bootstrap";
 import { NumericFormat } from "react-number-format";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
+import { Button } from "bootstrap";
 
 
 export default function ValutePregled(){
 
 
     const[kriptovalute,setKriptovalute] = useState();
+    const navigate= useNavigate();
     async function dohvatiKriptovalute(){
         const odgovor = await KriptovaluteServices.get()
         setKriptovalute(odgovor)
@@ -39,6 +41,7 @@ export default function ValutePregled(){
                     <th>Volumen</th>
                     <th>Trzisna_vrjednost</th>
                     <th>Cijena</th>
+                    <th>Akcija</th>
                 </tr>
             </thead>
 
@@ -70,6 +73,12 @@ export default function ValutePregled(){
                                 />
 
                         
+                        </td>
+
+                        <td>
+                            <Button
+                                onClick={()=>navigate(`/Valute/${kriptovaluta.kripto_id}`)}
+                                >Promjena</Button>
                         </td>
                     </tr>
                 ))}

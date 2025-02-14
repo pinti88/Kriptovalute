@@ -1,17 +1,28 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
 import KriptovaluteServices from "../../services/KriptovaluteServices";
+import { useEffect, useState } from "react";
 
 
 
-export default function ValutePromjena(){
+export default function ValuteDodaj(){
 
     const navigate  = useNavigate();
+    const[valute,setValute]= useState();
+    const routeParmas = useParams();
+
+    async function dohvatiSmjer(){
+        const odgovor = await valuteService.GetBySifra(routeParmas.sifra)
+        setSmjer(odgovor)
+    }
+    useEffect(())
+        
+    }
 
 
     async function dodaj(kriptovaluta){
-        const odgovor = await KriptovaluteServices.dodaj(kriptovaluta);
+        const odgovor = KriptovaluteServices.dodaj(kriptovaluta);
         if (odgovor.greska){
             alert(odgovor.poruka)
             return

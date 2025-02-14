@@ -9,10 +9,15 @@ return await httpService.get('/Kriptovalute')
 })
 .catch((e)=>{})
 
-
-
-
 }
+
+async function getBySifra(){
+    return await httpService.get('/Kriptovalute')
+    .then((odgovor)=> {
+        return odgovor.data;
+    })
+    .catch((e)=>{})
+}    
 
 
 async function dodaj(kriptovaluta){
@@ -23,5 +28,6 @@ async function dodaj(kriptovaluta){
 
 export default{
     get,
+    getBySifra,
     dodaj
 }
