@@ -10,7 +10,18 @@ return await httpService.get('/Kriptovalute')
 .catch((e)=>{})
 
 
+
+
 }
+
+
+async function dodaj(kriptovaluta){
+    return httpService.post('/Kriptovalute', kriptovaluta)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
+}
+
 export default{
-    get
+    get,
+    dodaj
 }

@@ -61,7 +61,7 @@ export default function ValutePregled(){
                             <NumericFormat
                                 value={kriptovaluta.cijena}
                                 displayType={'text'}
-                                thousandSeperator='.'
+                                thousandSeparator='.'
                                 decimalSeparator=","
                                 prefix={'$'}
                                 decimalScale={2}
