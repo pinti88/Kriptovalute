@@ -1,7 +1,8 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import { ESModulesEvaluator } from "vite/module-runner";
+import KriptovaluteServices from "../../services/KriptovaluteServices";
+
 
 
 export default function ValuteDodaj(){
@@ -10,11 +11,18 @@ export default function ValuteDodaj(){
 
 
     async function dodaj(kriptovaluta){
-        const odgovor = KriptovalutaService.dodaj(kriptovaluta);
+        const odgovor = KriptovaluteServices.dodaj(kriptovaluta);
         if (odgovor.greska){
+            alert(odgovor.poruka)
             return
         }
-        navigate(RouteNames.VALUTE_PREGLED)
+
+
+        // min hack, čekam backend 
+        setTimeout(() => {
+            navigate(RouteNames.VALUTE_PREGLED)
+        }, 2000);
+       
             
 
     }
@@ -30,9 +38,9 @@ export default function ValuteDodaj(){
             
                 ime: podatci.get('ime'),
                 simbol: podatci.get('simbol'),
-                cijena: parseFloat(podatci.get("cijenaValute")),
-                trzisna_vrjednost: 0,
-                volumen: 0
+                cijena: parseFloat(podatci.get('cijena')),
+                trzisna_vrjednost: parseFloat(podatci.get('trzisna_vrjednost')),
+                volumen: parseFloat(podatci.get('volumen'))
               }
         );
     }
@@ -42,12 +50,17 @@ export default function ValuteDodaj(){
         <Form onSubmit={odradiSubmit}>
 
 
-            <Form.Group controlId="Nova kripto valuta">
-                <Form.Label>Naziv</Form.Label>
-                <Form.Control type="text" name="naziv" requierd />
+            <Form.Group controlId="ime">
+                <Form.Label>Ime</Form.Label>
+                <Form.Control type="text" name="ime" required />
 
             </Form.Group>
 
+            <Form.Group controlId="simbol">
+                <Form.Label>Simbol</Form.Label>
+                <Form.Control type="text" name="simbol" />
+
+            </Form.Group>
 
 
             <Form.Group controlId="cijena">
@@ -58,18 +71,18 @@ export default function ValuteDodaj(){
 
 
 
-            <Form.Group controlId="IzvodiSeOd">
-                <Form.Label>TrzisnaVrjednost</Form.Label>
-                <Form.Control type="data" name="TrzisnaVrjednost" requierd />
+            <Form.Group controlId="trzisna_vrjednost">
+                <Form.Label>Trzisna Vrjednost</Form.Label>
+                <Form.Control type="number" name="trzisna_vrjednost" required />
 
             </Form.Group>
 
-
-            <Form.Group controlId="Simbol">
-                <Form.Label>Simbol</Form.Label>
-                <Form.Control type="text" name="simbol" step={0.01}/>
+            <Form.Group controlId="volumen">
+                <Form.Label>Volumen</Form.Label>
+                <Form.Control type="number" name="volumen" required />
 
             </Form.Group>
+           
 
             <hr/>
 
@@ -82,7 +95,7 @@ export default function ValuteDodaj(){
             </Col>
 
             <Col xs={6} sm={12} md={9} lg={10} xl={6} xxl={6}>
-           <Button variant="success" type="submit" ClassName="siroko">
+           <Button variant="success" type="submit" className="siroko">
            Dodaj kriptovalutu
            </Button>
             </Col>

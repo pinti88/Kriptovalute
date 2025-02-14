@@ -17,6 +17,7 @@ export default function ValutePregled(){
 
     // hooks (kuka) se izvodi priliko mdolaska na stranicu kritpovalute 
     useEffect(()=>{
+        //debugger;
        dohvatiKriptovalute();
     },[]) 
 
@@ -68,8 +69,7 @@ export default function ValutePregled(){
                                 fixedDecimalScale
                                 />
 
-                           
-                            {kriptovaluta.cijena}
+                        
                         </td>
                     </tr>
                 ))}
