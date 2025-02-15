@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react"
-import KriptovaluteServices from "../../services/KriptovaluteServices"
-import { Table } from "react-bootstrap";
+import KriptovaluteServices from "../../services/KriptovaluteServices.js"
+import { Button, Table } from "react-bootstrap";
 import { NumericFormat } from "react-number-format";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import { Button } from "bootstrap";
 
 
 export default function ValutePregled(){

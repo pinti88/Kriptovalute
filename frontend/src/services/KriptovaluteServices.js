@@ -11,8 +11,8 @@ return await httpService.get('/Kriptovalute')
 
 }
 
-async function getBySifra(){
-    return await httpService.get('/Kriptovalute')
+async function getBySifra(sifra){
+    return await httpService.get('/Kriptovalute/' + sifra)
     .then((odgovor)=> {
         return odgovor.data;
     })

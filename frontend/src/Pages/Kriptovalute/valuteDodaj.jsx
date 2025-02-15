@@ -1,11 +1,11 @@
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import KriptovaluteServices from "../../services/KriptovaluteServices";
+import KriptovaluteServices from "../../services/KriptovaluteServices.js";
 
 
 
-export default function ValutePromjena(){
+export default function ValuteDodaj(){
 
     const navigate  = useNavigate();
 
@@ -16,13 +16,7 @@ export default function ValutePromjena(){
             alert(odgovor.poruka)
             return
         }
-
-
-        // min hack, čekam backend 
-        setTimeout(() => {
-            navigate(RouteNames.VALUTE_PREGLED)
-        }, 2000);
-       
+        navigate(RouteNames.VALUTA_PREGLED)
             
 
     }
@@ -89,7 +83,7 @@ export default function ValutePromjena(){
 <Row>
             <Col xs={6} sm={12} md={6} lg={2} xl={6} xxl={6}>
             <Link
-            to={RouteNames.VALUTE_PREGLED}
+            to={RouteNames.VALUTA_PREGLED}
             className = "btn btn-danger siroko"
            > Odustani</Link>
             </Col>

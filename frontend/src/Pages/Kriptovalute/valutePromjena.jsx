@@ -1,41 +1,35 @@
-
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { RouteNames } from "../../constants";
-import KriptovaluteServices from "../../services/KriptovaluteServices";
+import KriptovaluteServices from "../../services/KriptovaluteServices.js";
 import { useEffect, useState } from "react";
 
 
 
-export default function ValuteDodaj(){
+export default function ValutePromjena(){
 
     const navigate  = useNavigate();
-    const[valute,setValute]= useState();
+    const[valuta,setValuta]= useState({});
     const routeParmas = useParams();
 
-    async function dohvatiSmjer(){
-        const odgovor = await valuteService.GetBySifra(routeParmas.sifra)
-        setSmjer(odgovor)
-    }
-    useEffect(())
+    async function dohvatiValuta(){
+        const odgovor = await KriptovaluteServices.getBySifra(routeParmas.kripto_id)
+        setValuta(odgovor)
         
     }
 
+    useEffect(()=>{
+        dohvatiValuta()
+    },[])
+
 
     async function dodaj(kriptovaluta){
-        const odgovor = KriptovaluteServices.dodaj(kriptovaluta);
+        const odgovor = await KriptovaluteServices.dodaj(kriptovaluta);
         if (odgovor.greska){
             alert(odgovor.poruka)
             return
         }
-
-
-        // min hack, čekam backend 
-        setTimeout(() => {
-            navigate(RouteNames.VALUTE_PREGLED)
-        }, 2000);
-       
-            
-
+        navigate(RouteNames.VALUTA_PREGLED)
     }
 
 
@@ -63,20 +57,20 @@ export default function ValuteDodaj(){
 
             <Form.Group controlId="ime">
                 <Form.Label>Ime</Form.Label>
-                <Form.Control type="text" name="ime" required />
+                <Form.Control type="text" name="ime" required defaultValue={valuta.ime}/>
 
             </Form.Group>
 
             <Form.Group controlId="simbol">
                 <Form.Label>Simbol</Form.Label>
-                <Form.Control type="text" name="simbol" />
+                <Form.Control type="text" name="simbol" defaultValue={valuta.simbol}/>
 
             </Form.Group>
 
 
             <Form.Group controlId="cijena">
                 <Form.Label>Cijena</Form.Label>
-                <Form.Control type="number" name="cijena" step={0.01}/>
+                <Form.Control type="number" name="cijena" step={0.01} defaultValue={valuta.cijena}/>
 
             </Form.Group>
 
@@ -84,13 +78,13 @@ export default function ValuteDodaj(){
 
             <Form.Group controlId="trzisna_vrjednost">
                 <Form.Label>Trzisna Vrjednost</Form.Label>
-                <Form.Control type="number" name="trzisna_vrjednost" required />
+                <Form.Control type="number" name="trzisna_vrjednost" required defaultValue={valuta.trzisna_vrjednost}/>
 
             </Form.Group>
 
             <Form.Group controlId="volumen">
                 <Form.Label>Volumen</Form.Label>
-                <Form.Control type="number" name="volumen" required />
+                <Form.Control type="number" name="volumen" required defaultValue={valuta.volumen}/>
 
             </Form.Group>
            
@@ -100,7 +94,7 @@ export default function ValuteDodaj(){
 <Row>
             <Col xs={6} sm={12} md={6} lg={2} xl={6} xxl={6}>
             <Link
-            to={RouteNames.VALUTE_PREGLED}
+            to={RouteNames.VALUTA_PREGLED}
             className = "btn btn-danger siroko"
            > Odustani</Link>
             </Col>

@@ -7,6 +7,7 @@ import { RouteNames } from './constants'
 import Pocetna from './Pages/Pocetna'
 import ValutePregled from './Pages/Kriptovalute/ValutePregled'
 import ValuteDodaj from './Pages/Kriptovalute/valuteDodaj'
+import ValutePromjena from './Pages/Kriptovalute/valutePromjena'
 
 function App() {
   
@@ -18,7 +19,7 @@ function App() {
         <NavBarEdunova></NavBarEdunova>
         <Routes>
           <Route path={RouteNames.HOME} element={<Pocetna />} />
-          <Route path={RouteNames.VALUTE_PREGLED} element={<ValutePregled />} />
+          <Route path={RouteNames.VALUTA_PREGLED} element={<ValutePregled />} />
           <Route path={RouteNames.VALUTA_NOVI} element={<ValuteDodaj/>}/>
           <Route path={RouteNames.VALUTA_PROMJENA} element={<ValutePromjena/>}/>
         </Routes>

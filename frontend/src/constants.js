@@ -1,7 +1,7 @@
 export const RouteNames = {
 HOME: '/',
 
-VALUTE_PREGLED: '/Valute',
+VALUTA_PREGLED: '/Valute',
 VALUTA_NOVI: '/Valute/dodaj',
 VALUTA_PROMJENA: '/Valute/:kripto_id'
 }
