@@ -26,15 +26,24 @@ async function dodaj(kriptovaluta){
     .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
 }
 
+async function promjena(kripto_id,kriptovaluta){
+    return httpService.put('/Kriptovalute/'+kripto_id, kriptovaluta)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
+}
+
+async function obrisi(kripto_id){
+    return httpService.delete('/Kriptovalute/'+kripto_id)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
+}
+
+
 export default{
     get,
     getBySifra,
     dodaj,
     promjena,
-    obriši
+    obrisi
 }
 
-async function promjena(kriptovaluta){
-    return httpService.put('/Kriptovalute'/+kripto_id, kriptovaluta)
-    .then(()=>{return {greska: false, poruka: 'Dodano'}})
-    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})}

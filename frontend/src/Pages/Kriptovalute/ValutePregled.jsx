@@ -23,16 +23,21 @@ export default function ValutePregled(){
     },[]) 
 
 
-    function obriši (sifra){
+    function obrisi (sifra){
         if(!confirm('brisanje')){
             return
         }
         BrisanjeKategorije(sifra)
     }
 
-    async function  BrisanjeKategorije(sifra){
+    async function  BrisanjeKategorije(kripto_id){
 
-        const odgovoro
+        const odgovor = await KriptovaluteServices.obrisi(kripto_id)
+        if (odgovor.greska){
+            alert(odgovor.poruka)
+            return
+        }
+        dohvatiKriptovalute()
     }
     
     
@@ -100,7 +105,7 @@ export default function ValutePregled(){
 
                                 <Button
                                 variant = "danger"
-                                onClick={()=>obriši(`/Valute/{kriptovaluta.kripto_id}`)}
+                                onClick={()=>obrisi(kriptovaluta.kripto_id)}
                                 >Obriši</Button>
                         </td>
                     </tr>

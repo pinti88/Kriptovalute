@@ -51,7 +51,7 @@ export default function ValutePromjena(){
     }
     return(
         <>
-        Dodavanje Valute
+        Promjena Valute
         <Form onSubmit={odradiSubmit}>
 
 
