@@ -80,7 +80,7 @@ values
 
 insert into kriptovalute(ime, simbol, cijena, trzisna_vrjednost, volumen)
 values
-('Bitcoin', 'BTC', 950000.00, 640000000000.00, 5000000000.00),
+('Bitcoin', 'BTC', 95000.00, 640000000000.00, 5000000000.00),
 ('Ethereum', 'ETH', 3500.00, 240000000000.00, 3000000000.00),
 ('Solana', 'SOL', 240.00, 8000000000.00, 150000000.00),
 ('Ripple', 'XRP', 1.45, 24000000000.00, 2000000000.00),

@@ -29,5 +29,12 @@ async function dodaj(kriptovaluta){
 export default{
     get,
     getBySifra,
-    dodaj
+    dodaj,
+    promjena,
+    obriši
 }
+
+async function promjena(kriptovaluta){
+    return httpService.put('/Kriptovalute'/+kripto_id, kriptovaluta)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})}

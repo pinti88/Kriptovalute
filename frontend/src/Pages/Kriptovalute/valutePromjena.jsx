@@ -23,8 +23,8 @@ export default function ValutePromjena(){
     },[])
 
 
-    async function dodaj(kriptovaluta){
-        const odgovor = await KriptovaluteServices.dodaj(kriptovaluta);
+    async function promjena(kriptovaluta){
+        const odgovor = await KriptovaluteServices.promjena(routeParmas.kripto_id,kriptovaluta);
         if (odgovor.greska){
             alert(odgovor.poruka)
             return
@@ -38,7 +38,7 @@ export default function ValutePromjena(){
 
         let podatci = new FormData(e.target);
 
-        dodaj(
+        promjena(
             {
             
                 ime: podatci.get('ime'),
@@ -101,7 +101,7 @@ export default function ValutePromjena(){
 
             <Col xs={6} sm={12} md={9} lg={10} xl={6} xxl={6}>
            <Button variant="success" type="submit" className="siroko">
-           Dodaj kriptovalutu
+           Promjeni kriptovalutu
            </Button>
             </Col>
         </Row>

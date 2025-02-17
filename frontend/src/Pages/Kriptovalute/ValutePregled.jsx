@@ -23,9 +23,26 @@ export default function ValutePregled(){
     },[]) 
 
 
+    function obriši (sifra){
+        if(!confirm('brisanje')){
+            return
+        }
+        BrisanjeKategorije(sifra)
+    }
+
+    async function  BrisanjeKategorije(sifra){
+
+        const odgovoro
+    }
+    
+    
+
+
 
     return(
         <>
+
+
 
         <Link
         to={RouteNames.VALUTA_NOVI}
@@ -78,6 +95,13 @@ export default function ValutePregled(){
                             <Button
                                 onClick={()=>navigate(`/Valute/${kriptovaluta.kripto_id}`)}
                                 >Promjena</Button>
+                                &nbsp;&nbsp;&nbsp;
+
+
+                                <Button
+                                variant = "danger"
+                                onClick={()=>obriši(`/Valute/{kriptovaluta.kripto_id}`)}
+                                >Obriši</Button>
                         </td>
                     </tr>
                 ))}
