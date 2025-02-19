@@ -1,71 +1,49 @@
-import { Button, Col, Form, Row } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
-import { RouteNames } from "../../constants";
-import KorisniciServices from "../../services/KorisniciServices.js";
+import { httpService } from "./HttpService";
 
-export default function KorisniciDodaj() {
-    const navigate = useNavigate();
 
-    async function dodaj(korisnik) {
-        const odgovor = await KorisniciServices.dodaj(korisnik);
-        if (odgovor.greska) {
-            alert(odgovor.poruka);
-            return;
-        }
-        navigate(RouteNames.KORISNICI_PREGLED);
-    }
+async function get(){
+return await httpService.get('/Korisnici')
+.then((odgovor)=> {
+    //console.table(odgovor.data)
+    return odgovor.data;
+})
+.catch((e)=>{})
 
-    function odradiSubmit(e) {
-        e.preventDefault();
-        let podatci = new FormData(e.target);
-
-        dodaj({
-            ime: podatci.get("ime"),
-            prezime: podatci.get("prezime"),
-            email: podatci.get("email"),
-            telefonski_broj: podatci.get("telefonski_broj")
-        });
-    }
-
-    return (
-        <>
-            Dodavanje Korisnika
-            <Form onSubmit={odradiSubmit}>
-                <Form.Group controlId="ime">
-                    <Form.Label>Ime</Form.Label>
-                    <Form.Control type="text" name="ime" required />
-                </Form.Group>
-
-                <Form.Group controlId="prezime">
-                    <Form.Label>Prezime</Form.Label>
-                    <Form.Control type="text" name="prezime" required />
-                </Form.Group>
-
-                <Form.Group controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" name="email" required />
-                </Form.Group>
-
-                <Form.Group controlId="telefonski_broj">
-                    <Form.Label>Telefonski broj</Form.Label>
-                    <Form.Control type="text" name="telefonski_broj" required />
-                </Form.Group>
-
-                <hr />
-
-                <Row>
-                    <Col xs={6} sm={12} md={6} lg={2} xl={6} xxl={6}>
-                        <Link to={RouteNames.KORISNICI_PREGLED} className="btn btn-danger siroko">
-                            Odustani
-                        </Link>
-                    </Col>
-                    <Col xs={6} sm={12} md={9} lg={10} xl={6} xxl={6}>
-                        <Button variant="success" type="submit" className="siroko">
-                            Dodaj korisnika
-                        </Button>
-                    </Col>
-                </Row>
-            </Form>
-        </>
-    );
 }
+
+async function getBySifra(sifra){
+    return await httpService.get('/Korisnici/' + sifra)
+    .then((odgovor)=> {
+        return odgovor.data;
+    })
+    .catch((e)=>{})
+}    
+
+
+async function dodaj(Korisnici){
+    return httpService.post('/Korisnici', Korisnici)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
+}
+
+async function promjena(Korisnik,Korisnici){
+    return httpService.put('/Korisnici/'+Korisnik, Korisnici)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
+}
+
+async function obrisi(Korisnik){
+    return httpService.delete('/Korisnici/'+Korisnik)
+    .then(()=>{return {greska: false, poruka: 'Dodano'}})
+    .catch(()=> {return {greska: true, poruka:'Problem kod dodavanja'}})
+}
+
+
+export default{
+    get,
+    getBySifra,
+    dodaj,
+    promjena,
+    obrisi
+}
+

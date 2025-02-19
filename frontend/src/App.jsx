@@ -22,8 +22,9 @@ function App() {
           <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.VALUTA_PREGLED} element={<ValutePregled />} />
           <Route path={RouteNames.VALUTA_NOVI} element={<ValuteDodaj/>}/>
-          <Route path={RouteNames.VALUTA_PROMJENA} element={<ValutePromjena/>}/>
+          <Route path={RouteNames.VALUTA_PROMJENA} element={<ValutePromjena/>}/> 
         </Routes>
+        
 
         <hr />
         &copy; Kriptovalute 2025
