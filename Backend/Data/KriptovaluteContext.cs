@@ -12,7 +12,9 @@ namespace Backend.Data
 
         }
 
-        public DbSet<Kriptovaluta> Kriptovalute { get; set; } 
+        public DbSet<Kriptovaluta> Kriptovalute { get; set; }
+
+        public DbSet<Korisnik> Korisnici { get; set; }
 
 
     }

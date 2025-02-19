@@ -8,9 +8,9 @@ namespace Backend.Controllers
     [Route("api/v1/[controller]")]
     public class KorisniciController : ControllerBase
     {
-        private readonly KorisniciContext _context;
+        private readonly KriptovaluteContext _context;
 
-        public KorisniciController(KorisniciContext context)
+        public KorisniciController(KriptovaluteContext context)
         {
             _context = context;
         }
@@ -48,7 +48,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Korisnici korisnici)
+        public IActionResult Post(Korisnik korisnici)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Korisnici korisnici)
+        public IActionResult Put(int sifra, Korisnik korisnik)
         {
             try
             {
@@ -76,10 +76,10 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
-                s.ime = korisnici.ime; 
-                s.prezime = korisnici.prezime; 
-                s.email = korisnici.email; 
-                s.telefonski_broj = korisnici.telefonski_broj; 
+                s.Ime = korisnik.Ime; 
+                s.Prezime = korisnik.Prezime; 
+                s.Email = korisnik.Email; 
+                s.Telefonski_broj = korisnik.Telefonski_broj; 
 
                 _context.Korisnici.Update(s);
                 _context.SaveChanges();
