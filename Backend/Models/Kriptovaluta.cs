@@ -7,7 +7,7 @@ namespace Backend.Models
         [Key]
         public int Kripto_id { get; set; }
         public string Ime { get; set; } = "";
-        public string Simbol { get; set; }
+        public string Simbol { get; set; } = "";
 
         public decimal? Cijena { get; set; }
 

@@ -11,7 +11,9 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddDbContext<KorisniciContext>(options => {
+    options.UseSqlServer(builder.Configuration.GetConnectionString("KorisniciContext"));
+});
 
 builder.Services.AddDbContext<KriptovaluteContext>(options => {
     options.UseSqlServer(builder.Configuration.GetConnectionString("KriptovaluteContext"));
