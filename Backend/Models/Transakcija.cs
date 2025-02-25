@@ -9,7 +9,7 @@ namespace Backend.Models
 
         public int Kolicina { get; set; } 
 
-        public int Kripto_id { get; set; } 
+        public int Kripto_id { get; set; }
 
         public int Naknada { get; set; }
 
