@@ -16,5 +16,6 @@ namespace Backend.Data
 
         public DbSet<Korisnik> Korisnici { get; set; }
         public  DbSet<Transakcija> Transakcije { get; set; }
+        public DbSet<KriptoWallet> KriptoWalleti { get; set; }
     }
 }
