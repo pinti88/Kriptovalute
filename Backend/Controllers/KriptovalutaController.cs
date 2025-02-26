@@ -1,25 +1,20 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class KriptovaluteController : ControllerBase
+    public class KriptovaluteController(KriptovaluteContext context, IMapper mapper) : BackendController(context, mapper)
     {
 
-        private readonly KriptovaluteContext _context;
-
-
-        public KriptovaluteController(KriptovaluteContext context)
-        {
-            _context = context;
-        }
 
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<KriptoValutaDTORead>> Get()
         {
             try
             {
