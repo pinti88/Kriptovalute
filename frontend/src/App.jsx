@@ -8,6 +8,9 @@ import Pocetna from './Pages/Pocetna'
 import ValutePregled from './Pages/Kriptovalute/ValutePregled'
 import ValuteDodaj from './Pages/Kriptovalute/valuteDodaj'
 import ValutePromjena from './Pages/Kriptovalute/valutePromjena'
+import KorisniciPregled from './Pages/Korisnici/korisniciPregled'
+import KorisniciPromjena from './Pages/Korisnici/korisniciPromjena'
+import KorisniciDodaj from './Pages/Korisnici/korisniciDodaj'
 
 
 function App() {
@@ -23,7 +26,12 @@ function App() {
           <Route path={RouteNames.VALUTA_PREGLED} element={<ValutePregled />} />
           <Route path={RouteNames.VALUTA_NOVI} element={<ValuteDodaj/>}/>
           <Route path={RouteNames.VALUTA_PROMJENA} element={<ValutePromjena/>}/> 
+          <Route path={RouteNames.KORISNICI_PREGLED} element={KorisniciPregled/>}/>
+          <Route path={RouteNames.KORISNICI_DODAJ} element={KorisniciDodaj/>}/>
+          <Route path={RouteNames.KORISNICI_PROMJENA} element={KorisniciPromjena/>}/>
         </Routes>
+
+        
         
 
         <hr />

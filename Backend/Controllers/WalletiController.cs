@@ -23,7 +23,7 @@ namespace Backend.Controllers
             {
                 try
                 {
-                    var wallets = _context.Wallets.Include(w => w.Korisnik).ToList();
+                    var wallets = _context.Walleti.Include(w => w.Korisnik).ToList();
                     return Ok(wallets);
                 }
                 catch (Exception e)
@@ -39,7 +39,7 @@ namespace Backend.Controllers
             {
                 try
                 {
-                    var wallet = _context.Wallets.Include(w => w.Korisnik).FirstOrDefault(w => w.WalletId == walletId);
+                    var wallet = _context.Walleti.Include(w => w.Korisnik).FirstOrDefault(w => w.WalletId == walletId);
                     if (wallet == null)
                     {
                         return NotFound();
@@ -58,7 +58,7 @@ namespace Backend.Controllers
             {
                 try
                 {
-                    _context.Wallets.Add(wallet);
+                    _context.Walleti.Add(wallet);
                     _context.SaveChanges();
                     return StatusCode(StatusCodes.Status201Created, wallet);
                 }
@@ -75,15 +75,15 @@ namespace Backend.Controllers
             {
                 try
                 {
-                    var existingWallet = _context.Wallets.Find(walletId);
+                    var existingWallet = _context.Walleti.Find(walletId);
                     if (existingWallet == null)
                     {
                         return NotFound();
                     }
 
-                    existingWallet.Mreza = wallet.Mreza;
-                    existingWallet.KorisnikId = wallet.KorisnikId;
-                    existingWallet.Kljuc = wallet.Kljuc;
+                    Wallet.Mreza = wallet.Mreza;
+                    Wallet.KorisnikId = wallet.KorisnikId;
+                    Wallet.Kljuc = wallet.Kljuc;
 
                     _context.Wallets.Update(existingWallet);
                     _context.SaveChanges();
@@ -102,13 +102,13 @@ namespace Backend.Controllers
             {
                 try
                 {
-                    var wallet = _context.Wallets.Find(walletId);
+                    var wallet = _context.Walleti.Find(walletId);
                     if (wallet == null)
                     {
                         return NotFound();
                     }
 
-                    _context.Wallets.Remove(wallet);
+                    _context.Walleti.Remove(wallet);
                     _context.SaveChanges();
                     return Ok(new { poruka = "Uspješno obrisano" });
                 }
