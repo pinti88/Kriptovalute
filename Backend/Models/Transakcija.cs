@@ -14,6 +14,6 @@ namespace Backend.Models
         public Kriptovaluta KriptoValuta { get; set; }
 
         public decimal Naknada { get; set; }
-
+        public object Kripto_id { get; internal set; }
     }
 }
