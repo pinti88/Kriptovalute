@@ -2,12 +2,12 @@ import { httpService } from "./HttpService";
 
 
 async function get(){
-return await httpService.get('/Korisnici')
-.then((odgovor)=> {
-    //console.table(odgovor.data)
-    return odgovor.data;
-})
-.catch((e)=>{})
+    return await httpService.get('/Korisnici')
+    .then((odgovor)=> {
+        //console.table(odgovor.data)
+        return odgovor.data;
+    })
+    .catch((e)=>{})
 
 }
 
