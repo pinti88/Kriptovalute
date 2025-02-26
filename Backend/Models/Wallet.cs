@@ -15,9 +15,8 @@ namespace Backend.Models
 
         public string Kljuc { get; set; } = "";
 
-        
+        public ICollection<Kriptovaluta>? Kriptovalute { get; set; }
 
-       
-        
+
     }
 }
