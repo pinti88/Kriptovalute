@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
@@ -7,11 +8,12 @@ namespace Backend.Models
         [Key]
         public int Transakcija_id  { get; set; }
 
-        public int Kolicina { get; set; } 
+        public decimal Kolicina { get; set; }
 
-        public int Kripto_id { get; set; }
+        [ForeignKey("kripto_id")]
+        public Kriptovaluta KriptoValuta { get; set; }
 
-        public int Naknada { get; set; }
+        public decimal Naknada { get; set; }
 
     }
 }

@@ -1,16 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
     public class Wallet
     {
         [Key]
-        public int wallet_id { get; set; }
+        public int Wallet_id { get; set; }
 
-        public int mreza { get; set; }
+        public string? Mreza { get; set; }
 
-        public int korisnik_id { get; set; }
+        [ForeignKey("korisnik_id")]
+        public Korisnik Korisnik { get; set; }
 
-        public int kljuc { get; set; }
+        public string Kljuc { get; set; } = "";
+
+        public ICollection<Kriptovaluta>? Kriptovalute { get; set; }
     }
 }

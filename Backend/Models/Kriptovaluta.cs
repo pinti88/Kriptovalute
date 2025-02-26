@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.RegularExpressions;
 
 namespace Backend.Models
 {
@@ -14,6 +15,8 @@ namespace Backend.Models
         public decimal? Trzisna_vrjednost { get; set; }
 
         public decimal Volumen { get; set; }
+
+        public ICollection<Wallet>? Walleti { get; } = [];
 
     }
 }

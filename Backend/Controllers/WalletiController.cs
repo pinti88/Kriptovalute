@@ -1,6 +1,7 @@
 ﻿using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -39,7 +40,7 @@ namespace Backend.Controllers
             {
                 try
                 {
-                    var wallet = _context.Walleti.Include(w => w.Korisnik).FirstOrDefault(w => w.WalletId == walletId);
+                    var wallet = _context.Walleti.Include(w => w.Korisnik).FirstOrDefault(w => w.Wallet_id == walletId);
                     if (wallet == null)
                     {
                         return NotFound();
@@ -69,31 +70,7 @@ namespace Backend.Controllers
             }
 
             // PUT api/v1/wallets/{walletId}
-            [HttpPut]
-            [Route("{walletId:int}")]
-            public IActionResult Put(int walletId, Wallet wallet)
-            {
-                try
-                {
-                    var existingWallet = _context.Walleti.Find(walletId);
-                    if (existingWallet == null)
-                    {
-                        return NotFound();
-                    }
-
-                    Wallet.Mreza = wallet.Mreza;
-                    Wallet.KorisnikId = wallet.KorisnikId;
-                    Wallet.Kljuc = wallet.Kljuc;
-
-                    _context.Wallets.Update(existingWallet);
-                    _context.SaveChanges();
-                    return Ok(new { poruka = "Uspješno promijenjeno" });
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e);
-                }
-            }
+         
 
             
             [HttpDelete]

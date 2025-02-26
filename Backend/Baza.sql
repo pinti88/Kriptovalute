@@ -25,8 +25,7 @@ telefonski_broj varchar(50)
 create table walleti(
 wallet_id int not null primary key identity(1,1),
 mreza varchar(50),
-korisnik_id int not null references korisnici(
-korisnik_id),
+korisnik_id int not null references korisnici(korisnik_id),
 kljuc varchar(50) not null
 );
 
@@ -39,7 +38,7 @@ trzisna_vrjednost decimal (15,2),
 volumen decimal(15,2)
 );
 
-create table kriptowallet(
+create table kriptowalleti(
 wallet_id int not null references walleti(wallet_id),
 kripto_id int not null references kriptovalute(kripto_id)
 );
@@ -86,7 +85,7 @@ values
 ('Ripple', 'XRP', 1.45, 24000000000.00, 2000000000.00),
 ('Dogecoin', 'DOGE', 0.40, 11000000000.00, 20000000000.00);
 
-insert into kriptowallet(wallet_id, kripto_id) 
+insert into kriptowalleti(wallet_id, kripto_id) 
 values 
 (1, 1),(2, 2),(3, 3), (4, 1), (5, 2), (6, 3), (7, 1), (8, 2), (9, 3), (10,1); 
 

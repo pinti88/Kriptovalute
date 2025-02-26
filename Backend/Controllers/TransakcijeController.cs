@@ -62,33 +62,7 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("{id:int}")]
-        [Produces("application/json")]
-        public IActionResult Put(int id, Transakcija transakcija)
-        {
-            try
-            {
-                var t = _context.Transakcije.Find(id);
-
-                if (t == null)
-                {
-                    return NotFound();
-                }
-
-                t.Kolicina = transakcija.Kolicina;
-                t.Kripto_id = transakcija.Kripto_id;
-                t.Naknada = transakcija.Naknada;
-
-                _context.Transakcije.Update(t);
-                _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno promijenjeno" });
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e);
-            }
-        }
+       
 
         [HttpDelete]
         [Route("{id:int}")]
