@@ -62,7 +62,41 @@ namespace Backend.Controllers
             }
         }
 
-       
+        [HttpPut]
+        [Route("{sifra:int}")]
+        [Produces("application/json")]
+        public IActionResult Put(int sifra, Transakcija transakcija)
+        {
+            try
+            {
+                
+                var transakcije = _context.Transakcije.Find(sifra);
+
+                
+                if (transakcija == null)
+                {
+                    return NotFound();
+                }
+
+               
+                transakcija.Kolicina = transakcija.Kolicina;
+                transakcija.Naknada = transakcija.Naknada;
+                transakcija.Kripto_id = transakcija.Kripto_id;
+
+                
+                _context.SaveChanges();
+
+                
+                return Ok(transakcija);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
 
         [HttpDelete]
         [Route("{id:int}")]

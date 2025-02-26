@@ -18,7 +18,7 @@ namespace Backend.Controllers
                 _context = context;
             }
 
-            // GET api/v1/wallets
+            
             [HttpGet]
             public IActionResult Get()
             {
@@ -33,7 +33,6 @@ namespace Backend.Controllers
                 }
             }
 
-            // GET api/v1/wallets/{walletId}
             [HttpGet]
             [Route("{walletId:int}")]
             public IActionResult GetByWalletId(int walletId)
@@ -53,7 +52,41 @@ namespace Backend.Controllers
                 }
             }
 
-            // POST api/v1/wallets
+            [HttpPut]
+            [Route("{sifra:int}")]
+            [Produces("application/json")]
+            public IActionResult Put(int sifra, Wallet wallet)
+            {
+                try
+                {
+                    
+                    var walleti = _context.Walleti.Find(sifra);
+
+                    
+                    if (wallet == null)
+                    {
+                        return NotFound();
+                    }
+
+                    
+                    wallet.Mreza = wallet.Mreza;
+                    wallet.Kljuc = wallet.Kljuc;
+
+                   
+                    _context.SaveChanges();
+
+                    
+                    return Ok(wallet);
+                }
+                catch (Exception ex)
+                {
+                   
+                    return StatusCode(500, $"Internal server error: {ex.Message}");
+                }
+            }
+
+
+
             [HttpPost]
             public IActionResult Post(Wallet wallet)
             {
@@ -69,7 +102,7 @@ namespace Backend.Controllers
                 }
             }
 
-            // PUT api/v1/wallets/{walletId}
+            
          
 
             
