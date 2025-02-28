@@ -8,17 +8,17 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class KriptovaluteController(KriptovaluteContext context, IMapper mapper) : BackendController(context, mapper)
+    public class KriptovaluteController : BackendController
     {
-
-
+        public KriptovaluteController(KriptovaluteContext context, IMapper mapper) : base(context, mapper) { }
 
         [HttpGet]
         public ActionResult<List<KriptoValutaDTORead>> Get()
         {
             try
             {
-                return Ok(_context.Kriptovalute);
+                var kriptovalute = _context.Kriptovalute.ToList();
+                return Ok(_mapper.Map<List<KriptoValutaDTORead>>(kriptovalute));
             }
             catch (Exception e)
             {
@@ -37,14 +37,13 @@ namespace Backend.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(s);
+                return Ok(_mapper.Map<KriptoValutaDTORead>(s));
             }
             catch (Exception e)
             {
                 return BadRequest(e);
             }
         }
-
 
         [HttpPost]
         public IActionResult Post(Kriptovaluta kriptovaluta)
@@ -61,7 +60,6 @@ namespace Backend.Controllers
             }
         }
 
-
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
@@ -69,14 +67,11 @@ namespace Backend.Controllers
         {
             try
             {
-
                 var s = _context.Kriptovalute.Find(sifra);
-
                 if (s == null)
                 {
                     return NotFound();
                 }
-
 
                 s.Ime = kriptovaluta.Ime;
                 s.Cijena = kriptovaluta.Cijena;
@@ -86,14 +81,13 @@ namespace Backend.Controllers
 
                 _context.Kriptovalute.Update(s);
                 _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno promijenjeno" });
+                return Ok(_mapper.Map<KriptoValutaDTORead>(s));
             }
             catch (Exception e)
             {
                 return BadRequest(e);
             }
         }
-
 
         [HttpDelete]
         [Route("{sifra:int}")]
