@@ -1,16 +1,3 @@
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css'
-import { Container } from 'react-bootstrap'
-import NavBarEdunova from './components/NavBarEdunova'
-import { Route, Routes } from 'react-router-dom'
-import { RouteNames } from './constants'
-import Pocetna from './Pages/Pocetna'
-import ValutePregled from './Pages/Kriptovalute/ValutePregled'
-import ValuteDodaj from './Pages/Kriptovalute/ValuteDodaj'
-import ValutePromjena from './Pages/Kriptovalute/ValutePromjena'
-import KorisniciPregled from './Pages/Korisnici/KorisniciPregled'
-import KorisniciPromjena from './Pages/Korisnici/KorisniciPromjena'
-import KorisniciDodaj from './Pages/Korisnici/KorisniciDodaj'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Container } from 'react-bootstrap';
@@ -18,10 +5,15 @@ import NavBarEdunova from './components/NavBarEdunova';
 import { Route, Routes } from 'react-router-dom';
 import { RouteNames } from './constants';
 import Pocetna from './Pages/Pocetna';
+import ValutePregled from './Pages/Kriptovalute/ValutePregled';
+import ValuteDodaj from './Pages/Kriptovalute/ValuteDodaj';
+import ValutePromjena from './Pages/Kriptovalute/ValutePromjena';
+import KorisniciPregled from './Pages/Korisnici/KorisniciPregled';
+import KorisniciPromjena from './Pages/Korisnici/KorisniciPromjena';
+import KorisniciDodaj from './Pages/Korisnici/KorisniciDodaj';
 import TransakcijePregled from './Pages/Transakcije/TransakcijePregled';
 import TransakcijeDodaj from './Pages/Transakcije/TransakcijeDodaj';
 import TransakcijePromjena from './Pages/Transakcije/TransakcijePromjena';
-
 
 function App() {
   return (
@@ -36,7 +28,6 @@ function App() {
           <Route path={RouteNames.KORISNICI_PREGLED} element={<KorisniciPregled />} />
           <Route path={RouteNames.KORISNICI_DODAJ} element={<KorisniciDodaj />} />
           <Route path={RouteNames.KORISNICI_PROMJENA} element={<KorisniciPromjena />} />
-          <Route path={RouteNames.HOME} element={<Pocetna />} />
           <Route path={RouteNames.TRANSAKCIJE_PREGLED} element={<TransakcijePregled />} />
           <Route path={RouteNames.TRANSAKCIJE_DODAJ} element={<TransakcijeDodaj />} />
           <Route path={RouteNames.TRANSAKCIJE_PROMJENA} element={<TransakcijePromjena />} />
@@ -45,9 +36,7 @@ function App() {
         &copy; Kriptovalute 2025
       </Container>
     </>
-  )
+  );
 }
 
-export default App
-
-
+export default App;
