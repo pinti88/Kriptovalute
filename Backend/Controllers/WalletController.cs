@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
-    public class WalletiController
+    public class WalletController
     {
         [ApiController]
         [Route("api/v1/[controller]")]

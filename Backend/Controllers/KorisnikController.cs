@@ -1,4 +1,4 @@
-using Backend.Data;
+﻿using Backend.Data;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +6,11 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class TransakcijeController : ControllerBase
+    public class KorisnikController : ControllerBase
     {
         private readonly KriptovaluteContext _context;
 
-        public TransakcijeController(KriptovaluteContext context)
+        public KorisnikController(KriptovaluteContext context)
         {
             _context = context;
         }
@@ -20,7 +20,7 @@ namespace Backend.Controllers
         {
             try
             {
-                return Ok(_context.Transakcije);
+                return Ok(_context.Korisnici);
             }
             catch (Exception e)
             {
@@ -29,17 +29,17 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        [Route("{id:int}")]
-        public IActionResult GetById(int id)
+        [Route("{sifra:int}")]
+        public IActionResult GetBySifra(int sifra)
         {
             try
             {
-                var transakcija = _context.Transakcije.Find(id);
-                if (transakcija == null)
+                var s = _context.Korisnici.Find(sifra);
+                if (s == null)
                 {
                     return NotFound();
                 }
-                return Ok(transakcija);
+                return Ok(s);
             }
             catch (Exception e)
             {
@@ -48,13 +48,13 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Transakcija transakcija)
+        public IActionResult Post(Korisnik korisnici)
         {
             try
             {
-                _context.Transakcije.Add(transakcija);
+                _context.Korisnici.Add(korisnici); 
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, transakcija);
+                return StatusCode(StatusCodes.Status201Created, korisnici);
             }
             catch (Exception e)
             {
@@ -65,51 +65,44 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Transakcija transakcija)
+        public IActionResult Put(int sifra, Korisnik korisnik)
         {
             try
             {
-                
-                var transakcije = _context.Transakcije.Find(sifra);
+                var s = _context.Korisnici.Find(sifra);
 
-                
-                if (transakcija == null)
+                if (s == null)
                 {
                     return NotFound();
                 }
 
-               
-                transakcija.Kolicina = transakcija.Kolicina;
-                transakcija.Naknada = transakcija.Naknada;
-                transakcija.Kripto_id = transakcija.Kripto_id;
+                s.Ime = korisnik.Ime; 
+                s.Prezime = korisnik.Prezime; 
+                s.Email = korisnik.Email; 
+                s.Telefonski_broj = korisnik.Telefonski_broj; 
 
-                
+                _context.Korisnici.Update(s);
                 _context.SaveChanges();
-
-                
-                return Ok(transakcija);
+                return Ok(new { poruka = "Uspješno promijenjeno" });
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(e);
             }
         }
 
-
-
-
         [HttpDelete]
-        [Route("{id:int}")]
-        public IActionResult Delete(int id)
+        [Route("{sifra:int}")]
+        public IActionResult Delete(int sifra)
         {
             try
             {
-                var t = _context.Transakcije.Find(id);
-                if (t == null)
+                var s = _context.Korisnici.Find(sifra);
+                if (s == null)
                 {
                     return NotFound();
                 }
-                _context.Transakcije.Remove(t);
+                _context.Korisnici.Remove(s);
                 _context.SaveChanges();
                 return Ok(new { poruka = "Uspješno obrisano" });
             }

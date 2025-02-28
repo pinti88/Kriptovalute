@@ -11,9 +11,8 @@ namespace Backend.Models
         public decimal Kolicina { get; set; }
 
         [ForeignKey("kripto_id")]
-        public Kriptovaluta? KriptoValuta { get; set; }
+        public required Kriptovaluta KriptoValuta { get; set; }
 
         public decimal Naknada { get; set; }
-        public int? Kripto_id { get; set; }
     }
 }

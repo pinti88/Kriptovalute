@@ -13,7 +13,11 @@ namespace Backend.Mapping
             CreateMap<Kriptovaluta, KriptoValutaDTORead>();
             CreateMap<Korisnik, KorisnikDTORead>();
             CreateMap<KorisnikDTOInsertUpdate, Korisnik>();
-            CreateMap<Transakcija, TransakcijaDTORead>();
+            CreateMap<Transakcija, TransakcijaDTORead>()
+               .ForCtorParam(
+                   "KriptoValutaIme",
+                   opt => opt.MapFrom(src => src.KriptoValuta.Ime)
+               ); ;
             CreateMap<TransakcijaDTOInsertUpdate, Transakcija>();
             CreateMap<Wallet, WalletDTORead>();
             CreateMap<WalletDTOInsertUpdate, Wallet>();

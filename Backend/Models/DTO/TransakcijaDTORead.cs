@@ -1,9 +1,9 @@
 ﻿namespace Backend.Models.DTO
 {    
     public record TransakcijaDTORead(
-    int TransakcijaId,
+    int Transakcija_id,
     decimal Kolicina,
-    int KriptoId,
+    string KriptoValutaIme,
     decimal? Naknada
 );
     
