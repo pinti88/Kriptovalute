@@ -14,6 +14,6 @@ namespace Backend.Models
         public string? Email { get; set; }
 
         public string? Telefonski_broj { get; set; }
-        public object Transakcije { get; internal set; }
+       
     }
 }
