@@ -11,7 +11,7 @@ namespace Backend.Models
         public string? Mreza { get; set; }
 
         [ForeignKey("korisnik_id")]
-        public Korisnik Korisnik { get; set; }
+        public Korisnik? Korisnik { get; set; }
 
         public string Kljuc { get; set; } = "";
 

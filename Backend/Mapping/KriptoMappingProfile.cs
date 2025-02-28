@@ -11,8 +11,17 @@ namespace Backend.Mapping
         {
             // kreiramo mapiranja: izvor, odredište
             CreateMap<Kriptovaluta, KriptoValutaDTORead>();
-           
+            CreateMap<Korisnik, KorisnikDTORead>();
+            CreateMap<KorisnikDTOInsertUpdate, Korisnik>();
 
+            CreateMap<Transakcija, TransakcijaDTORead>();
+            CreateMap<TransakcijaDTOInsertUpdate, Transakcija>();
+
+            CreateMap<Wallet, WalletDTORead>();
+            CreateMap<WalletDTOInsertUpdate, Wallet>();
         }
+
+
     }
+    
 }
