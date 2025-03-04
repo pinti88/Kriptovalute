@@ -7,11 +7,11 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class WalletsController : ControllerBase
+    public class WalletController : ControllerBase
     {
         private readonly KriptovaluteContext _context;
 
-        public WalletsController(KriptovaluteContext context)
+        public WalletController(KriptovaluteContext context)
         {
             _context = context;
         }

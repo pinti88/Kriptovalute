@@ -3,7 +3,7 @@
     public record WalletDTORead(
     int WalletId,
     string Mreza,
-    int KorisnikId,
+    string KorisnikImePrezime,
     string Kljuc
 );
 

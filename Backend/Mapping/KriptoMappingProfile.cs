@@ -17,9 +17,12 @@ namespace Backend.Mapping
                .ForCtorParam(
                    "KriptoValutaIme",
                    opt => opt.MapFrom(src => src.KriptoValuta.Ime)
-               ); ;
+               ); 
             CreateMap<TransakcijaDTOInsertUpdate, Transakcija>();
-            CreateMap<Wallet, WalletDTORead>();
+            CreateMap<Wallet, WalletDTORead>().ForCtorParam(
+                   "KorisnikImePrezime",
+                   opt => opt.MapFrom(src => src.Korisnik.Ime + " " + src.Korisnik.Prezime)
+               ); ;
             CreateMap<WalletDTOInsertUpdate, Wallet>();
         }
 
