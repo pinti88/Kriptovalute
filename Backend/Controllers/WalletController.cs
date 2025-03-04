@@ -1,5 +1,7 @@
-﻿using Backend.Data;
+﻿using AutoMapper;
+using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,19 +12,22 @@ namespace Backend.Controllers
     public class WalletController : ControllerBase
     {
         private readonly KriptovaluteContext _context;
+        private readonly IMapper _mapper; 
 
-        public WalletController(KriptovaluteContext context)
+        public WalletController(KriptovaluteContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper; 
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<WalletDTORead>> Get()
         {
             try
             {
                 var wallets = _context.Walleti.Include(w => w.Korisnik).ToList();
-                return Ok(wallets);
+                var walletDTOs = _mapper.Map<List<WalletDTORead>>(wallets); 
+                return Ok(walletDTOs);
             }
             catch (Exception e)
             {
@@ -40,7 +45,8 @@ namespace Backend.Controllers
                 {
                     return NotFound(new { poruka = "Wallet nije pronađen." });
                 }
-                return Ok(wallet);
+                var walletDTO = _mapper.Map<WalletDTORead>(wallet); 
+                return Ok(walletDTO);
             }
             catch (Exception e)
             {
@@ -59,13 +65,14 @@ namespace Backend.Controllers
                     return NotFound(new { poruka = "Wallet nije pronađen." });
                 }
 
-                // Ažuriranje podataka
+               
                 walleti.Mreza = wallet.Mreza;
                 walleti.Kljuc = wallet.Kljuc;
 
                 _context.SaveChanges();
 
-                return Ok(walleti);
+                var updatedWalletDTO = _mapper.Map<WalletDTORead>(walleti);
+                return Ok(updatedWalletDTO);
             }
             catch (Exception ex)
             {
@@ -85,7 +92,9 @@ namespace Backend.Controllers
 
                 _context.Walleti.Add(wallet);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, wallet);
+
+                var walletDTO = _mapper.Map<WalletDTORead>(wallet); 
+                return StatusCode(StatusCodes.Status201Created, walletDTO);
             }
             catch (Exception e)
             {
@@ -115,3 +124,4 @@ namespace Backend.Controllers
         }
     }
 }
+
