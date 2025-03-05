@@ -3,7 +3,7 @@ import KriptovaluteServices from "../../services/KriptovaluteServices.js"
 import { Button, Table } from "react-bootstrap";
 import { NumericFormat } from "react-number-format";
 import { Link, useNavigate } from "react-router-dom";
-import { RouteNames } from "../../constants";
+import { RouteNames } from "../../constants.js";
 
 
 export default function ValutePregled(){

@@ -29,12 +29,20 @@ export default function NavBarEdunova(){
             
             <NavDropdown title="Izbornik" id="basic-nav-dropdown">
               <NavDropdown.Item 
-              onClick={()=>navigate(RouteNames.VALUTA_PREGLED)}
+              onClick={()=>navigate(RouteNames.VALUTE_PREGLED)}
               >Valute</NavDropdown.Item>
               
               <NavDropdown.Item 
               onClick={()=>navigate(RouteNames.KORISNICI_PREGLED)}
               >Korisnici</NavDropdown.Item>
+
+              <NavDropdown.Item 
+              onClick={()=>navigate(RouteNames.TRANSAKCIJE_PREGLED)}
+              >Transakcije</NavDropdown.Item>
+
+              <NavDropdown.Item 
+              onClick={()=>navigate(RouteNames.WALLETI_PREGLED)}
+              >Walleti</NavDropdown.Item>
               
             </NavDropdown>
             <Nav.Link href='https://pinti88-001-site1.otempurl.com/swagger'target='_blank'>Swagger</Nav.Link>

@@ -5,7 +5,7 @@ import NavBarEdunova from './components/NavBarEdunova';
 import { Route, Routes } from 'react-router-dom';
 import { RouteNames } from './constants';
 import Pocetna from './Pages/Pocetna';
-import ValutePregled from './Pages/Kriptovalute/ValutePregled';
+import ValutePregled from './Pages/Kriptovalute/valutePregled';
 import ValuteDodaj from './Pages/Kriptovalute/ValuteDodaj';
 import ValutePromjena from './Pages/Kriptovalute/ValutePromjena';
 import KorisniciPregled from './Pages/Korisnici/KorisniciPregled';
