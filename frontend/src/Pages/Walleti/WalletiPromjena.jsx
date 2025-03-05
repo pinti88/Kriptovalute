@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { RouteNames } from "../../constants";
+import { RouteNames } from "../../constants.js";
 import WalletServices from "../../services/WalletServices.js";
 
-export default function WalletPromjena() {
+export default function WalletiPromjena() {
     const { wallet_id } = useParams();
     const navigate = useNavigate();
     const [wallet, setWallet] = useState({

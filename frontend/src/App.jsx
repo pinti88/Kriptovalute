@@ -39,7 +39,7 @@ function App() {
 
           <Route path={RouteNames.WALLETI_PREGLED} element={<WalletiPregled />} />
           <Route path={RouteNames.WALLETI_DODAJ} element={<WalletiDodaj />} />
-          <Route path={RouteNames.WALLET_PROMJENA} element={<WalletiPromjena />} />
+          <Route path={RouteNames.WALLETI_PROMJENA} element={<WalletiPromjena />} />
         </Routes>
       </Container>
     </>

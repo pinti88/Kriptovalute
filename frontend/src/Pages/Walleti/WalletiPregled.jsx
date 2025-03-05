@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { RouteNames } from "../../constants";
+import { RouteNames } from "../../constants.js";
 import WalletServices from "../../services/WalletServices.js";
 
-export default function WalletPregled() {
+export default function WalletiPregled() {
 
     const [walleti, setWalleti] = useState([]);
 
