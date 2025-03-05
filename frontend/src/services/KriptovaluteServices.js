@@ -4,7 +4,7 @@ import { httpService } from "./HttpService";
 async function get(){
 return await httpService.get('/Kriptovalute')
 .then((odgovor)=> {
-    //console.table(odgovor.data)
+    
     return odgovor.data;
 })
 .catch((e)=>{})
