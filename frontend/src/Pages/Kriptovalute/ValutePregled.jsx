@@ -16,9 +16,9 @@ export default function ValutePregled(){
         setKriptovalute(odgovor)
     }
 
-    // hooks (kuka) se izvodi priliko mdolaska na stranicu kritpovalute 
+    
     useEffect(()=>{
-        //debugger;
+        
        dohvatiKriptovalute();
     },[]) 
 
