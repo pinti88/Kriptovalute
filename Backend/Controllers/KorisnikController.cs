@@ -59,9 +59,10 @@ namespace Backend.Controllers
         {
             try
             {
-                _context.Korisnici.Add(Korisnici);
+                var korisnik = _mapper.Map<Korisnik>(korisnikDTORead);
+                _context.Korisnici.Add(korisnik);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, _mapper.Map<KorisnikDTORead>(Korisnici));
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<KorisnikDTORead>(korisnik));
 
 
             }
