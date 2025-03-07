@@ -2,7 +2,6 @@
 using Backend.Models;
 using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 
 namespace Backend.Controllers
@@ -25,8 +24,8 @@ namespace Backend.Controllers
         {
             try
             {
-                var kriptovalute = _context.Kriptovalute.ToList();
-                return Ok(_mapper.Map<List<KorisnikDTORead>>(kriptovalute));
+                var korisnici = _context.Korisnici.ToList();
+                return Ok(_mapper.Map<List<KorisnikDTORead>>(korisnici));
             }
             catch (Exception e)
             {
@@ -45,12 +44,14 @@ namespace Backend.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(s);
+               return Ok(_mapper.Map<KorisnikDTORead>(s));
             }
             catch (Exception e)
             {
                 return BadRequest(e);
             }
+
+
         }
 
         [HttpPost]
@@ -88,8 +89,7 @@ namespace Backend.Controllers
 
                 _context.Korisnici.Update(s);
                 _context.SaveChanges();
-
-                return Ok(new { poruka = "Uspješno promijenjeno" });
+                return Ok(_mapper.Map<KorisnikDTORead>(s));
             }
             catch (Exception e)
             {
