@@ -55,13 +55,15 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Korisnik korisnici)
+        public IActionResult Post(KorisnikDTOInsertUpdate korisnikDTORead)
         {
             try
             {
-                _context.Korisnici.Add(korisnici);
+                _context.Korisnici.Add(Korisnici);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, korisnici);
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<KorisnikDTORead>(Korisnici));
+
+
             }
             catch (Exception e)
             {
