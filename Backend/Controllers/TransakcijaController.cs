@@ -33,12 +33,19 @@ namespace Backend.Controllers
         {
             try
             {
-                var transakcija = _context.Transakcije.Find(id);
-                if (transakcija == null)
+                try
                 {
-                    return NotFound();
+                    var s = _context.Transakcije.Find(id);
+                    if (s == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(_mapper.Map<TransakcijaDTORead>(s));
                 }
-                return Ok(transakcija);
+                catch (Exception e)
+                {
+                    return BadRequest(e);
+                }
             }
             catch (Exception e)
             {
@@ -47,13 +54,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Transakcija transakcija)
+        public IActionResult Post(TransakcijaDTOInsertUpdate transakcijaDTORead)
         {
             try
             {
-                _context.Transakcije.Add(transakcija);
+                var Transakcija = _mapper.Map<Transakcija>(transakcijaDTORead);
+                _context.Transakcije.Add(Transakcija);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, transakcija);
+                return StatusCode(StatusCodes.Status201Created, Transakcija);
             }
             catch (Exception e)
             {
