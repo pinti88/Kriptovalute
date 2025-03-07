@@ -1,6 +1,9 @@
 ﻿using Backend.Data;
 using Backend.Models;
+using Backend.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace Backend.Controllers
 {
@@ -9,18 +12,21 @@ namespace Backend.Controllers
     public class KorisnikController : ControllerBase
     {
         private readonly KriptovaluteContext _context;
+        private readonly IMapper _mapper;
 
-        public KorisnikController(KriptovaluteContext context)
+        public KorisnikController(KriptovaluteContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult<List<KorisnikDTORead>> Get()
         {
             try
             {
-                return Ok(_context.Korisnici);
+                var kriptovalute = _context.Kriptovalute.ToList();
+                return Ok(_mapper.Map<List<KorisnikDTORead>>(kriptovalute));
             }
             catch (Exception e)
             {
@@ -52,7 +58,7 @@ namespace Backend.Controllers
         {
             try
             {
-                _context.Korisnici.Add(korisnici); 
+                _context.Korisnici.Add(korisnici);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status201Created, korisnici);
             }
@@ -70,19 +76,19 @@ namespace Backend.Controllers
             try
             {
                 var s = _context.Korisnici.Find(sifra);
-
                 if (s == null)
                 {
                     return NotFound();
                 }
 
-                s.Ime = korisnik.Ime; 
-                s.Prezime = korisnik.Prezime; 
-                s.Email = korisnik.Email; 
-                s.Telefonski_broj = korisnik.Telefonski_broj; 
+                s.Ime = korisnik.Ime;
+                s.Prezime = korisnik.Prezime;
+                s.Email = korisnik.Email;
+                s.Telefonski_broj = korisnik.Telefonski_broj;
 
                 _context.Korisnici.Update(s);
                 _context.SaveChanges();
+
                 return Ok(new { poruka = "Uspješno promijenjeno" });
             }
             catch (Exception e)
@@ -102,8 +108,10 @@ namespace Backend.Controllers
                 {
                     return NotFound();
                 }
+
                 _context.Korisnici.Remove(s);
                 _context.SaveChanges();
+
                 return Ok(new { poruka = "Uspješno obrisano" });
             }
             catch (Exception e)
