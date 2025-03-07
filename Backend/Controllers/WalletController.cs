@@ -55,7 +55,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{walletId:int}")]
-        public IActionResult Put(int walletId, [FromBody] Wallet wallet)
+        public IActionResult Put(int walletId, WalletDTOInsertUpdate walletDto)
         {
             try
             {
@@ -65,9 +65,9 @@ namespace Backend.Controllers
                     return NotFound(new { poruka = "Wallet nije pronađen." });
                 }
 
-               
-                walleti.Mreza = wallet.Mreza;
-                walleti.Kljuc = wallet.Kljuc;
+                // dovrsiti
+
+
 
                 _context.SaveChanges();
 
