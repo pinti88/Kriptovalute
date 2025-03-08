@@ -72,34 +72,41 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Transakcija transakcija)
+        public IActionResult Put(int sifra,TransakcijaDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                
-                var transakcije = _context.Transakcije.Find(sifra);
-
-                
-                if (transakcija == null)
+                Transakcija? e;
+                try
                 {
-                    return NotFound();
+                    e = _context.Transakcije.Find(sifra);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
+                }
+                if (e == null)
+                {
+                    return NotFound(new { poruka = "Transakcija ne postoji u bazi" });
                 }
 
-               
-                transakcija.Kolicina = transakcija.Kolicina;
-                transakcija.Naknada = transakcija.Naknada;
+                e = _mapper.Map(dto, e);
 
-                
+                _context.Transakcije.Update(e);
                 _context.SaveChanges();
 
-                
-                return Ok(transakcija);
+                return Ok(new { poruka = "Uspješno promjenjeno" });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
+                return BadRequest(new { poruka = ex.Message });
             }
         }
+
 
 
 

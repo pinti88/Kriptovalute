@@ -75,7 +75,7 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Korisnik korisnik)
+        public IActionResult Put(int sifra, KorisnikDTOInsertUpdate korisnikDTORead)
         {
             try
             {
@@ -85,10 +85,10 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
-                s.Ime = korisnik.Ime;
-                s.Prezime = korisnik.Prezime;
-                s.Email = korisnik.Email;
-                s.Telefonski_broj = korisnik.Telefonski_broj;
+                s.Ime = korisnikDTORead.Ime;
+                s.Prezime = korisnikDTORead.Prezime;
+                s.Email =korisnikDTORead.Email;
+                s.Telefonski_broj = korisnikDTORead.Telefonski_broj;
 
                 _context.Korisnici.Update(s);
                 _context.SaveChanges();

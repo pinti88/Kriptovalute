@@ -64,7 +64,7 @@ namespace Backend.Controllers
         [HttpPut]
         [Route("{sifra:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, Kriptovaluta kriptovaluta)
+        public IActionResult Put(int sifra, KriptoValutaDTOInsertUpdate kriptoValutaDTO)
         {
             try
             {
@@ -74,11 +74,11 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
-                s.Ime = kriptovaluta.Ime;
-                s.Cijena = kriptovaluta.Cijena;
-                s.Volumen = kriptovaluta.Volumen;
-                s.Trzisna_vrjednost = kriptovaluta.Trzisna_vrjednost;
-                s.Simbol = kriptovaluta.Simbol;
+                s.Ime = kriptoValutaDTO.Ime;
+                s.Cijena = kriptoValutaDTO.Cijena;
+                s.Volumen = kriptoValutaDTO.Volumen;
+                s.Trzisna_vrjednost = KriptoValutaDTORead.Trzisna_vrjednost;
+                s.Simbol = KriptoValutaDTORead.Simbol;
 
                 _context.Kriptovalute.Update(s);
                 _context.SaveChanges();
