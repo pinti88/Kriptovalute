@@ -88,7 +88,7 @@ namespace Backend.Controllers
                 s.Ime = korisnikDTORead.Ime;
                 s.Prezime = korisnikDTORead.Prezime;
                 s.Email =korisnikDTORead.Email;
-                s.Telefonski_broj = korisnikDTORead.Telefonski_broj;
+                s.Telefonski_broj = korisnikDTORead.TelefonskiBroj;
 
                 _context.Korisnici.Update(s);
                 _context.SaveChanges();

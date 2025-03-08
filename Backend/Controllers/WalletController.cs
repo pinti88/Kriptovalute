@@ -1,127 +1,140 @@
 ﻿using AutoMapper;
 using Backend.Data;
-using Backend.Models;
 using Backend.Models.DTO;
+using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class WalletController : ControllerBase
+    public class FileController : ControllerBase
     {
         private readonly KriptovaluteContext _context;
-        private readonly IMapper _mapper; 
+        private readonly IMapper _mapper;
 
-        public WalletController(KriptovaluteContext context, IMapper mapper)
+        public FileController(KriptovaluteContext context, IMapper mapper)
         {
             _context = context;
-            _mapper = mapper; 
+            _mapper = mapper;
         }
 
         [HttpGet]
         public ActionResult<List<WalletDTORead>> Get()
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var wallets = _context.Walleti.Include(w => w.Korisnik).ToList();
-                var walletDTOs = _mapper.Map<List<WalletDTORead>>(wallets); 
-                return Ok(walletDTOs);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, $"Greška na serveru: {e.Message}");
-            }
-        }
-
-        [HttpGet("{walletId:int}")]
-        public IActionResult GetByWalletId(int walletId)
-        {
-            try
-            {
-                var wallet = _context.Walleti.Include(w => w.Korisnik).FirstOrDefault(w => w.Wallet_id == walletId);
-                if (wallet == null)
-                {
-                    return NotFound(new { poruka = "Wallet nije pronađen." });
-                }
-                var walletDTO = _mapper.Map<WalletDTORead>(wallet); 
-                return Ok(walletDTO);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, $"Greška na serveru: {e.Message}");
-            }
-        }
-
-        [HttpPut("{walletId:int}")]
-        public IActionResult Put(int walletId, WalletDTOInsertUpdate walletDto)
-        {
-            try
-            {
-                var walleti = _context.Walleti.Find(walletId);
-                if (walleti == null)
-                {
-                    return NotFound(new { poruka = "Wallet nije pronađen." });
-                }
-
-                // dovrsiti
-
-
-
-                _context.SaveChanges();
-
-                var updatedWalletDTO = _mapper.Map<WalletDTORead>(walleti);
-                return Ok(updatedWalletDTO);
+                var wallets = _context.Walleti.ToList();
+                return Ok(_mapper.Map<List<WalletDTORead>>(wallets));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Greška na serveru: {ex.Message}");
+                return BadRequest(new { poruka = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public ActionResult<WalletDTORead> GetById(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                var wallet = _context.Walleti.Find(id);
+                if (wallet == null)
+                {
+                    return NotFound(new { poruka = "Novčanik ne postoji" });
+                }
+                return Ok(_mapper.Map<WalletDTORead>(wallet));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Wallet wallet)
+        public IActionResult Post(WalletDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                if (wallet == null)
-                {
-                    return BadRequest(new { poruka = "Podaci nisu ispravni." });
-                }
-
+                var wallet = _mapper.Map<Wallet>(dto);
                 _context.Walleti.Add(wallet);
                 _context.SaveChanges();
-
-                var walletDTO = _mapper.Map<WalletDTORead>(wallet); 
-                return StatusCode(StatusCodes.Status201Created, walletDTO);
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<WalletDTORead>(wallet));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Greška na serveru: {e.Message}");
+                return BadRequest(new { poruka = ex.Message });
             }
         }
 
-        [HttpDelete("{walletId:int}")]
-        public IActionResult Delete(int walletId)
+        [HttpPut]
+        [Route("{id:int}")]
+        public IActionResult Put(int id, WalletDTOInsertUpdate dto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
             try
             {
-                var wallet = _context.Walleti.Find(walletId);
+                var wallet = _context.Walleti.Find(id);
                 if (wallet == null)
                 {
-                    return NotFound(new { poruka = "Wallet nije pronađen." });
+                    return NotFound(new { poruka = "Novčanik ne postoji" });
+                }
+
+                _mapper.Map(dto, wallet);
+                _context.Walleti.Update(wallet);
+                _context.SaveChanges();
+
+                return Ok(new { poruka = "Novčanik uspješno ažuriran" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { poruka = ex.Message });
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public IActionResult Delete(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+            try
+            {
+                var wallet = _context.Walleti.Find(id);
+                if (wallet == null)
+                {
+                    return NotFound(new { poruka = "Novčanik ne postoji" });
                 }
 
                 _context.Walleti.Remove(wallet);
                 _context.SaveChanges();
-                return Ok(new { poruka = "Uspješno obrisano." });
+
+                return Ok(new { poruka = "Novčanik uspješno obrisan" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return StatusCode(500, $"Greška na serveru: {e.Message}");
+                return BadRequest(new { poruka = ex.Message });
             }
         }
     }
 }
+
 

@@ -13,7 +13,7 @@ namespace Backend.Models
         [MaxLength(10)]
         public string Simbol { get; set; } = string.Empty;
         public decimal? Cijena { get; set; }
-        public decimal? Trzisna_vrjednost { get; set; }
+        public decimal? TrzisnaVrjednost { get; set; }
         public decimal Volumen { get; set; }
         public ICollection<Transakcija>? Transakcije { get; set; } = new List<Transakcija>(); 
         public ICollection<Wallet>? Walleti { get; set; } = new List<Wallet>();

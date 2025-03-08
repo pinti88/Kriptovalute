@@ -62,33 +62,47 @@ namespace Backend.Controllers
         }
 
         [HttpPut]
-        [Route("{sifra:int}")]
+        [Route("{id:int}")]
         [Produces("application/json")]
-        public IActionResult Put(int sifra, KriptoValutaDTOInsertUpdate kriptoValutaDTO)
+        public IActionResult Put(int id, KriptoValutaDTOInsertUpdate KriptoValutaDtoRead)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new { poruka = ModelState });
+            }
+
             try
             {
-                var s = _context.Kriptovalute.Find(sifra);
-                if (s == null)
+                
+                Kriptovaluta? kriptovaluta;
+                try
                 {
-                    return NotFound();
+                    kriptovaluta = _context.Kriptovalute.Find(id);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(new { poruka = ex.Message });
                 }
 
-                s.Ime = kriptoValutaDTO.Ime;
-                s.Cijena = kriptoValutaDTO.Cijena;
-                s.Volumen = kriptoValutaDTO.Volumen;
-                s.Trzisna_vrjednost = KriptoValutaDTORead.Trzisna_vrjednost;
-                s.Simbol = KriptoValutaDTORead.Simbol;
+                if (kriptovaluta == null)
+                {
+                    return NotFound(new { poruka = "Kriptovaluta ne postoji u bazi" });
+                }
 
-                _context.Kriptovalute.Update(s);
+                kriptovaluta = _mapper.Map(KriptoValutaDtoRead, kriptovaluta);
+
+                
+                _context.Kriptovalute.Update(kriptovaluta);
                 _context.SaveChanges();
-                return Ok(_mapper.Map<KriptoValutaDTORead>(s));
+
+                return Ok(new { poruka = "Kriptovaluta uspješno ažurirana" });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                return BadRequest(e);
+                return BadRequest(new { poruka = ex.Message });
             }
         }
+
 
         [HttpDelete]
         [Route("{sifra:int}")]

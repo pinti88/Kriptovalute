@@ -34,7 +34,7 @@ kripto_id int not null primary key identity(1,1),
 ime varchar(50),
 simbol varchar(50),
 cijena decimal(10,2),
-trzisna_vrjednost decimal (15,2),
+TrzisnaVrijednost decimal (15,2),
 volumen decimal(15,2)
 );
 
