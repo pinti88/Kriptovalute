@@ -5,7 +5,7 @@
      string Ime ,
      string Simbol,
      decimal? Cijena,
-     decimal? TrzisnaVrijednost,
+     decimal? Trzisna_vrijednost,
      decimal Volumen 
         );
 }

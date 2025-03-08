@@ -34,7 +34,7 @@ kripto_id int not null primary key identity(1,1),
 ime varchar(50),
 simbol varchar(50),
 cijena decimal(10,2),
-TrzisnaVrijednost decimal (15,2),
+Trzisna_vrijednost decimal (15,2),
 volumen decimal(15,2)
 );
 
@@ -77,7 +77,7 @@ values
 ('Ripple', 9, 'B5TBsKw2g9UNuBbeDAfugC9TmtMR1DbK5b6U6DFhNe73'),
 ('Bitcoin', 10, '1BQdf7kLgHg5TVK9qbz5HjUbAEMt9MhZL6');
 
-insert into kriptovalute(ime, simbol, cijena, trzisna_vrjednost, volumen)
+insert into kriptovalute(ime, simbol, cijena, Trzisna_vrijednost, volumen)
 values
 ('Bitcoin', 'BTC', 95000.00, 640000000000.00, 5000000000.00),
 ('Ethereum', 'ETH', 3500.00, 240000000000.00, 3000000000.00),
