@@ -11,6 +11,7 @@ namespace Backend.Mapping
         {
             // kreiramo mapiranja: izvor, odredište
             CreateMap<Kriptovaluta, KriptoValutaDTORead>();
+            CreateMap<KriptoValutaDTOInsertUpdate, Kriptovaluta>();
             CreateMap<Korisnik, KorisnikDTORead>().ForCtorParam(
                    "KorisnikId",
                    opt => opt.MapFrom(src => src.Korisnik_id)
