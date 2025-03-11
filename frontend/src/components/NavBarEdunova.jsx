@@ -29,7 +29,7 @@ export default function NavBarEdunova(){
             
             <NavDropdown title="Izbornik" id="basic-nav-dropdown">
               <NavDropdown.Item 
-              onClick={()=>navigate(RouteNames.VALUTE_PREGLED)}
+              onClick={()=>navigate(RouteNames.VALUTA_PREGLED)}
               >Valute</NavDropdown.Item>
               
               <NavDropdown.Item 

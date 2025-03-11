@@ -44,7 +44,7 @@ export default function ValutePromjena(){
                 ime: podatci.get('ime'),
                 simbol: podatci.get('simbol'),
                 cijena: parseFloat(podatci.get('cijena')),
-                Trzisna_vrijednost: parseFloat(podatci.get('Trzisna_vrijednost')),
+                Trzisna_vrijednost: parseFloat(podatci.get('trzisna_vrijednost')),
                 volumen: parseFloat(podatci.get('volumen'))
               }
         );
@@ -78,7 +78,7 @@ export default function ValutePromjena(){
 
             <Form.Group controlId="Trzisna_vrijednost">
                 <Form.Label>Trzisna_vrijednostt</Form.Label>
-                <Form.Control type="number" name="Trzisna_vrijednost" required defaultValue={valuta.Trzisna_vrijednost}/>
+                <Form.Control type="number" name="Trzisna_vrijednost" required defaultValue={valuta.trzisna_vrijednost}/>
 
             </Form.Group>
 

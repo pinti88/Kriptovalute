@@ -80,7 +80,7 @@ export default function ValutePregled(){
                             {kriptovaluta.volumen}
                         </td>
                         <td>                    
-                            {kriptovaluta.trzisna_vrjednost}
+                            {kriptovaluta.trzisna_vrijednost}
                         </td>
                         <td className={kriptovaluta.cijena==null ? 'sredina' : 'desno'}>
                             <NumericFormat
