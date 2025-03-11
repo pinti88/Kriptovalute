@@ -33,7 +33,7 @@ export default function ValuteDodaj(){
                 ime: podatci.get('ime'),
                 simbol: podatci.get('simbol'),
                 cijena: parseFloat(podatci.get('cijena')),
-                trzisna_vrjednost: parseFloat(podatci.get('trzisna_vrjednost')),
+                trzisna_vrjednost: parseFloat(podatci.get('Trzisna_vrijednost')),
                 volumen: parseFloat(podatci.get('volumen'))
               }
         );
@@ -65,9 +65,10 @@ export default function ValuteDodaj(){
 
 
 
-            <Form.Group controlId="trzisna_vrjednost">
+            <Form.Group controlId="t
+            Trzisna_vrijednost">
                 <Form.Label>Trzisna Vrjednost</Form.Label>
-                <Form.Control type="number" name="trzisna_vrjednost" required />
+                <Form.Control type="number" name="Trzisna_vrijednost" required />
 
             </Form.Group>
 
