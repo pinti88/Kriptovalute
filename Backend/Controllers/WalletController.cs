@@ -3,6 +3,7 @@ using Backend.Data;
 using Backend.Models.DTO;
 using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -28,7 +29,7 @@ namespace Backend.Controllers
             }
             try
             {
-                var wallets = _context.Walleti.ToList();
+                var wallets = _context.Walleti.Include(w=>w.Korisnik).ToList();
                 return Ok(_mapper.Map<List<WalletDTORead>>(wallets));
             }
             catch (Exception ex)

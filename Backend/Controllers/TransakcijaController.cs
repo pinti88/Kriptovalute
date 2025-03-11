@@ -54,14 +54,18 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(TransakcijaDTOInsertUpdate transakcijaDTORead)
+        public IActionResult Post(TransakcijaDTOInsertUpdate dto)
         {
             try
             {
-                var Transakcija = _mapper.Map<Transakcija>(transakcijaDTORead);
+
+                var kriptovaluta = _context.Kriptovalute.Find(dto.KriptoId);
+
+                var Transakcija = _mapper.Map<Transakcija>(dto);
+                Transakcija.KriptoValuta = kriptovaluta;
                 _context.Transakcije.Add(Transakcija);
                 _context.SaveChanges();
-                return StatusCode(StatusCodes.Status201Created, Transakcija);
+                return StatusCode(StatusCodes.Status201Created, _mapper.Map<TransakcijaDTORead>(Transakcija));
             }
             catch (Exception e)
             {
