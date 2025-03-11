@@ -8,12 +8,12 @@ namespace Backend.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class FileController : ControllerBase
+    public class WalletController : ControllerBase
     {
         private readonly KriptovaluteContext _context;
         private readonly IMapper _mapper;
 
-        public FileController(KriptovaluteContext context, IMapper mapper)
+        public WalletController(KriptovaluteContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
